@@ -1,98 +1,223 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
-</p>
+<div align="center">
+  <h1>📚 Perpustakaan API</h1>
+  <p><strong>Modern Library Management System</strong></p>
+  
+  <p>
+    <img src="https://img.shields.io/badge/NestJS-E0234E?style=for-the-badge&logo=nestjs&logoColor=white" alt="NestJS" />
+    <img src="https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white" alt="TypeScript" />
+    <img src="https://img.shields.io/badge/Prisma-2D3748?style=for-the-badge&logo=prisma&logoColor=white" alt="Prisma" />
+    <img src="https://img.shields.io/badge/MySQL-4479A1?style=for-the-badge&logo=mysql&logoColor=white" alt="MySQL" />
+  </p>
+</div>
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+---
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+## 🌟 Overview
 
-## Description
+**Perpustakaan** is a robust and scalable RESTful API for library management built with NestJS, Prisma ORM, and MySQL. It provides comprehensive features for managing books, users, and borrowing operations with role-based access control.
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+## ✨ Features
 
-## Project setup
+- 📖 **Book Management** - CRUD operations for library books
+- 👥 **User Management** - User registration and authentication with role-based access (Admin/User)
+- 📋 **Borrowing System** - Track book loans with due dates and return status
+- 🔐 **JWT Authentication** - Secure API endpoints with JSON Web Tokens
+- ✅ **Data Validation** - Input validation using Zod schemas
+- 🗄️ **Database ORM** - Type-safe database queries with Prisma
+- 🎯 **TypeScript** - Full type safety and modern JavaScript features
 
-```bash
-$ npm install
+## 🏗️ Architecture
+
+```
+perpustakaan/
+├── src/
+│   ├── modules/         # Feature modules
+│   ├── common/          # Shared utilities
+│   ├── config/          # Configuration files
+│   └── main.ts          # Application entry point
+├── prisma/
+│   ├── schema.prisma    # Database schema
+│   └── migrations/      # Database migrations
+└── test/                # E2E tests
 ```
 
-## Compile and run the project
+## 📊 Database Schema
 
+### Models
+
+**Buku (Books)**
+- Book information (title, author, description, photo)
+- Status tracking (Available/Borrowed)
+- Creator relationship with User
+
+**User**
+- User credentials and profile
+- Role-based access (Admin/User)
+- Relationships with books and borrowing records
+
+**Peminjaman (Borrowing)**
+- Borrowing records with dates
+- Status tracking (Borrowed/Returned)
+- Cascade delete on user/book removal
+
+## 🚀 Getting Started
+
+### Prerequisites
+
+- Node.js (v18 or higher)
+- MySQL (v8 or higher)
+- npm or yarn
+
+### Installation
+
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/hanifsetyananda/learn-nest-be.git
+   cd perpustakaan
+   ```
+
+2. **Install dependencies**
+   ```bash
+   npm install
+   ```
+
+3. **Configure environment variables**
+   
+   Create a `.env` file in the root directory:
+   ```env
+   DATABASE_URL="mysql://username:password@localhost:3306/perpustakaan"
+   JWT_SECRET="your-secret-key-here"
+   PORT=3000
+   ```
+
+4. **Run database migrations**
+   ```bash
+   npx prisma migrate dev
+   ```
+
+5. **Generate Prisma Client**
+   ```bash
+   npx prisma generate
+   ```
+
+## 🎮 Running the Application
+
+### Development Mode
 ```bash
-# development
-$ npm run start
-
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
+npm run start:dev
 ```
 
-## Run tests
-
+### Production Mode
 ```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
+npm run build
+npm run start:prod
 ```
 
-## Deployment
-
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
-
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
-
+### Debug Mode
 ```bash
-$ npm install -g @nestjs/mau
-$ mau deploy
+npm run start:debug
 ```
 
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
+The API will be available at `http://localhost:3000`
 
-## Resources
+## 🧪 Testing
 
-Check out a few resources that may come in handy when working with NestJS:
+```bash
+# Unit tests
+npm run test
 
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
+# E2E tests
+npm run test:e2e
 
-## Support
+# Test coverage
+npm run test:cov
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+# Watch mode
+npm run test:watch
+```
 
-## Stay in touch
+## 📝 API Documentation
 
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+### Authentication Endpoints
+- `POST /auth/register` - Register new user
+- `POST /auth/login` - User login
+- `POST /auth/logout` - User logout
 
-## License
+### Book Endpoints
+- `GET /books` - Get all books
+- `GET /books/:id` - Get book by ID
+- `POST /books` - Create new book (Admin only)
+- `PUT /books/:id` - Update book (Admin only)
+- `DELETE /books/:id` - Delete book (Admin only)
 
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+### Borrowing Endpoints
+- `GET /peminjaman` - Get all borrowing records
+- `GET /peminjaman/:id` - Get borrowing record by ID
+- `POST /peminjaman` - Create new borrowing
+- `PUT /peminjaman/:id` - Update borrowing status
+- `DELETE /peminjaman/:id` - Delete borrowing record
+
+## 🛠️ Tech Stack
+
+| Technology | Purpose |
+|------------|---------|
+| **NestJS** | Progressive Node.js framework |
+| **TypeScript** | Type-safe JavaScript |
+| **Prisma** | Next-generation ORM |
+| **MySQL** | Relational database |
+| **JWT** | Authentication & authorization |
+| **Zod** | Schema validation |
+| **Jest** | Testing framework |
+
+## 📦 Project Scripts
+
+| Command | Description |
+|---------|-------------|
+| `npm run start` | Start the application |
+| `npm run start:dev` | Start in watch mode |
+| `npm run start:prod` | Start in production mode |
+| `npm run build` | Build the project |
+| `npm run format` | Format code with Prettier |
+| `npm run lint` | Lint and fix code |
+| `npm run test` | Run unit tests |
+| `npm run test:e2e` | Run end-to-end tests |
+
+## 🔒 Security
+
+- Password hashing with bcrypt
+- JWT-based authentication
+- Role-based access control (RBAC)
+- Input validation and sanitization
+- SQL injection prevention via Prisma
+
+## 🤝 Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+1. Fork the project
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+## 📄 License
+
+This project is licensed under the UNLICENSED License.
+
+## 👨‍💻 Author
+
+**Hanif Setyananda**
+- GitHub: [@hanifsetyananda](https://github.com/hanifsetyananda)
+
+## 🙏 Acknowledgments
+
+- [NestJS](https://nestjs.com/) - The progressive Node.js framework
+- [Prisma](https://www.prisma.io/) - Next-generation ORM
+- [TypeScript](https://www.typescriptlang.org/) - JavaScript with syntax for types
+
+---
+
+<div align="center">
+  <p>Made with ❤️ using NestJS</p>
+  <p>⭐ Star this repository if you find it helpful!</p>
+</div>
